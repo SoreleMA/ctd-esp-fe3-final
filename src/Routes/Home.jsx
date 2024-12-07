@@ -1,30 +1,19 @@
-import React, { useEffect } from 'react';
-import { useGlobalContext } from '../Components/utils/global.context';
-import Card from '../Components/Card';
+import React from 'react'
+import { useContext } from "react";
+import { ContextGlobal } from "../Components/utils/global.context";
+import Card from '../Components/Card'
+
+//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
-  const { state, dispatch } = useGlobalContext(); 
-  const { theme, dentists } = state;
-
-  useEffect(() => {
-    const fetchDentists = async () => {
-      const response = await fetch('https://api.example.com/dentists');
-      const data = await response.json();
-      dispatch({ type: 'SET_DENTISTS', payload: data });
-    };
-
-    if (dentists.length === 0) {
-      fetchDentists();
-    }
-  }, [dentists, dispatch]);
+  const { state } = useContext(ContextGlobal);
 
   return (
-    <main className={`home-container ${theme}`}>
+    <main className={state.theme}>
       <h1>Home</h1>
-      <div className='card-grid'>
-        {/* Aquí renderizamos las tarjetas */}
-        {dentists.map((dentist) => (
-          <Card key={dentist.id} dentist={dentist} />
+      <div className="card-grid">
+        {state.data.map((dentist) => (
+          <Card key={dentist.id} {...dentist} />
         ))}
       </div>
     </main>
