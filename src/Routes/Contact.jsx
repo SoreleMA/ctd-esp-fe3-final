@@ -7,8 +7,8 @@ const Contact = () => {
 
   return (
     <div className={state.theme}> {/* Aplicar la clase basada en el tema */}
-      <h2>Want to know more?</h2>
-      <p>Send us your questions and we will contact you</p>
+      <h2>¿Quieres saber mas?</h2>
+      <p>Envianos tu pregunta y nos contactaremos contigo</p>
       <Form />
     </div>
   );

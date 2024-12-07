@@ -13,7 +13,7 @@ const Form = () => {
     if (!/\S+@\S+\.\S+/.test(email)) {
       return "Por favor, ingresa un correo válido.";
     }
-    return null; // Sin errores
+    return null; 
   };
 
   const handleSubmit = (e) => {
@@ -26,8 +26,8 @@ const Form = () => {
     } else {
       setError(null);
       setSuccess(`Gracias ${name}, te contactaremos cuanto antes vía mail.`);
-      setName(""); // Limpiar campo de nombre
-      setEmail(""); // Limpiar campo de email
+      setName(""); 
+      setEmail(""); 
     }
   };
 
@@ -35,7 +35,7 @@ const Form = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Nombre Completo:</label>
+          <label htmlFor="name">Nombre: </label>
           <input
             type="text"
             id="name"
@@ -45,7 +45,7 @@ const Form = () => {
           />
         </div>
         <div>
-          <label htmlFor="email">Correo Electrónico:</label>
+          <label htmlFor="email">Email: </label>
           <input
             type="email"
             id="email"
