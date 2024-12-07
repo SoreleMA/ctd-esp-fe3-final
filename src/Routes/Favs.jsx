@@ -1,9 +1,17 @@
-import React, { useContext } from "react";
+// Favs.jsx
+
+import React, { useContext, useEffect } from "react";
 import Card from "../Components/Card";
 import { ContextGlobal } from "../Components/utils/global.context";
 
 const Favs = () => {
-  const { state } = useContext(ContextGlobal);
+  const { state, dispatch } = useContext(ContextGlobal);
+
+  useEffect(() => {
+    // Recupera los favoritos desde localStorage y actualiza el estado del contexto
+    const currentFavs = JSON.parse(localStorage.getItem("favs")) || [];
+    currentFavs.forEach(fav => dispatch({ type: "TOGGLE_FAV", payload: fav }));
+  }, [dispatch]);
 
   return (
     <main className={state.theme === "dark" ? "dark" : "light"}>
@@ -18,3 +26,4 @@ const Favs = () => {
 };
 
 export default Favs;
+

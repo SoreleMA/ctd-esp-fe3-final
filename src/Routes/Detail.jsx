@@ -26,12 +26,16 @@ const Detail = () => {
 
   return (
     <div className={state.theme}> {/* Aplicar tema claro u oscuro */}
-      <h1>Dentist Details</h1>
-      <div>
+      <h1 className="title">Dentist Details</h1>
+      <div className="dentist-card">
         <h2>{dentist.name}</h2>
         <p><strong>Email:</strong> {dentist.email}</p>
         <p><strong>Phone:</strong> {dentist.phone}</p>
-        <p><strong>Website:</strong> <a href={`http://${dentist.website}`} target="_blank" rel="noopener noreferrer">{dentist.website}</a></p>
+        <p><strong>Website:</strong> 
+          <a href={`http://${dentist.website}`} target="_blank" rel="noopener noreferrer">
+            {dentist.website}
+          </a>
+        </p>
       </div>
     </div>
   );

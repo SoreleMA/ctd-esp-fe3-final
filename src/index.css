@@ -30,7 +30,7 @@ code {
     monospace;
 }
 .favButton {
-  background-color: rgba(136, 136, 136, 0.116);
+  background-color: rgba(109, 44, 44, 0.116);
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -111,16 +111,18 @@ nav {
 /* Estilo general del Navbar */
 .navbar {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  width: 100%;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 0;
 }
 
 .navbar.dark {
-  --background-color: #333;
-  --text-color: #fff;
+  background-color: #121212;
+  color: white;
+  margin-bottom: -20px;
 }
 
 form{
@@ -204,7 +206,7 @@ body.dark nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%; /* Alinea el contenido con las cards */
+  width: 100%; /* Alinea el contenido con las cards */
   max-width: 1200px;
   margin: 0 auto;
   gap: 1rem;
@@ -328,7 +330,7 @@ footer {
   background-color: red;
   color: white;
   font-weight: bold;
-  padding: 15px 0;
+  padding: 14px 0;
   font-size: 14px;
   width: 100%;
   position: relative; 

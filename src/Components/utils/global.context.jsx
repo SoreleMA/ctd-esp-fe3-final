@@ -1,5 +1,10 @@
 import React, { createContext, useReducer, useEffect } from "react";
-export const initialState = { theme: "light", data: [], favorites: [] };
+
+export const initialState = {
+  theme: "light",
+  data: [],
+  favorites: []
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -10,9 +15,9 @@ const reducer = (state, action) => {
     case "TOGGLE_FAV":
       const isAlreadyFav = state.favorites.some((fav) => fav.id === action.payload.id);
       const updatedFavorites = isAlreadyFav
-        ? state.favorites.filter((fav) => fav.id !== action.payload.id) 
-        : [...state.favorites, action.payload]; 
-      localStorage.setItem("favs", JSON.stringify(updatedFavorites)); 
+        ? state.favorites.filter((fav) => fav.id !== action.payload.id)
+        : [...state.favorites, action.payload];
+      localStorage.setItem("favs", JSON.stringify(updatedFavorites));
       return { ...state, favorites: updatedFavorites };
     default:
       return state;
@@ -33,7 +38,7 @@ export const ContextProvider = ({ children }) => {
 
         // Cargar favoritos desde localStorage
         const storedFavs = JSON.parse(localStorage.getItem("favs")) || [];
-        dispatch({ type: "TOGGLE_FAV", payload: storedFavs });
+        storedFavs.forEach(fav => dispatch({ type: "TOGGLE_FAV", payload: fav }));
       } catch (error) {
         console.error("Error fetching data:", error);
       }

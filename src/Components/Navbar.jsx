@@ -32,7 +32,7 @@ const Navbar = () => {
           className={`theme-toggle ${state.theme}`}
           onClick={toggleTheme}
         >
-          {state.theme === "light" ? "🌙" : "🌞"}
+          {state.theme === "light" ? "🌛" : "☀️"}
         </button>
       </div>
     </nav>
