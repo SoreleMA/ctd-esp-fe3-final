@@ -1,23 +1,33 @@
 import React, { useState } from "react";
 
 const Form = () => {
-  const [formData, setFormData] = useState({ name: "", email: "" });
-  const [error, setError] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState("");
+
+  const validateForm = () => {
+    if (name.trim().length <= 5) {
+      return "El nombre debe tener más de 5 caracteres.";
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      return "Por favor, ingresa un correo válido.";
+    }
+    return null; // Sin errores
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const errorMsg = validateForm();
 
-    // Validaciones
-    if (formData.name.length > 5 && /\S+@\S+\.\S+/.test(formData.email)) {
-      setSuccessMessage(`Gracias ${formData.name}, te contactaremos cuanto antes vía mail.`);
-      setError(false);
-
-      // Limpiar los campos después de éxito
-      setFormData({ name: "", email: "" });
+    if (errorMsg) {
+      setError(errorMsg);
+      setSuccess("");
     } else {
-      setError(true);
-      setSuccessMessage("");
+      setError(null);
+      setSuccess(`Gracias ${name}, te contactaremos cuanto antes vía mail.`);
+      setName(""); // Limpiar campo de nombre
+      setEmail(""); // Limpiar campo de email
     }
   };
 
@@ -29,8 +39,8 @@ const Form = () => {
           <input
             type="text"
             id="name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Ingresa tu nombre completo"
           />
         </div>
@@ -39,24 +49,24 @@ const Form = () => {
           <input
             type="email"
             id="email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Ingresa tu correo electrónico"
           />
         </div>
         <button type="submit">Enviar</button>
       </form>
 
-      {error && <p style={{ color: "red" }}>Por favor verifica tu información nuevamente.</p>}
-      {successMessage && (
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {success && (
         <p
           style={{
-            color: "black",
+            color: "green",
             fontWeight: "bold",
             fontSize: "1.2rem",
           }}
         >
-          {successMessage}
+          {success}
         </p>
       )}
     </div>

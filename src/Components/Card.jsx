@@ -1,15 +1,29 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import doctorImage from "/images/doctor.jpg";
-import { ContextGlobal } from "./utils/global.context";
 
 const Card = ({ name, username, id }) => {
-  const { state, dispatch } = useContext(ContextGlobal);
+  const [isFav, setIsFav] = useState(false);
 
-  const isFav = state.favorites.some((fav) => fav.id === id);
+  useEffect(() => {
+    const currentFavs = JSON.parse(localStorage.getItem("favorites")) || [];
+    setIsFav(currentFavs.some((fav) => fav.id === id));
+  }, [id]);
 
   const toggleFav = () => {
-    dispatch({ type: "TOGGLE_FAV", payload: { name, username, id } });
+    const currentFavs = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    // Alternar favorito
+    let updatedFavs;
+    if (isFav) {
+      updatedFavs = currentFavs.filter((fav) => fav.id !== id); 
+    } else {
+      updatedFavs = [...currentFavs, { name, username, id }]; 
+    }
+
+    
+    localStorage.setItem("favorites", JSON.stringify(updatedFavs));
+    setIsFav(!isFav); // Cambiar estado local
   };
 
   return (
@@ -19,8 +33,8 @@ const Card = ({ name, username, id }) => {
         <h3>{name}</h3>
       </Link>
       <p>{username}</p>
-      <button onClick={toggleFav} className="favButton">
-        {isFav ? "🌟" : "★"}
+      <button onClick={toggleFav} className={`favButton ${isFav ? "fav" : ""}`}>
+        ★
       </button>
     </div>
   );

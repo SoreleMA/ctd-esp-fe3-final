@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import { ContextGlobal } from "./utils/global.context";
-import facebookIcon from "/images/ico-facebook.png";
-import instagramIcon from "/images/ico-instagram.png";
-import whatsappIcon from "/images/ico-whatsapp.png";
-import tiktokIcon from "/images/ico-tiktok.png";
 import logoDH from "/images/DH.png";
+
+// Datos de redes sociales
+const socialLinks = [
+  { name: "Facebook", icon: "/images/ico-facebook.png", url: "https://facebook.com" },
+  { name: "Instagram", icon: "/images/ico-instagram.png", url: "https://instagram.com" },
+  { name: "WhatsApp", icon: "/images/ico-whatsapp.png", url: "https://whatsapp.com" },
+  { name: "TikTok", icon: "/images/ico-tiktok.png", url: "https://tiktok.com" },
+];
 
 const Footer = () => {
   const { state } = useContext(ContextGlobal);
@@ -12,17 +16,26 @@ const Footer = () => {
   return (
     <footer className={`footer ${state.theme}`}>
       <div className="footer-top">
-        <p>VOLTAR PARA O TOPO</p>
+        <a href="#top" className="back-to-top">
+          VOLTAR PARA O TOPO
+        </a>
       </div>
       <div className="footer-content">
         <div className="footer-logo">
           <img src={logoDH} alt="Digital House Logo" />
         </div>
         <div className="footer-icons">
-          <img src={facebookIcon} alt="Facebook Icon" />
-          <img src={instagramIcon} alt="Instagram Icon" />
-          <img src={whatsappIcon} alt="WhatsApp Icon" />
-          <img src={tiktokIcon} alt="TikTok Icon" />
+          {socialLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Ir para ${link.name}`}
+            >
+              <img src={link.icon} alt={`${link.name} Icon`} />
+            </a>
+          ))}
         </div>
       </div>
     </footer>
